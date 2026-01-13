@@ -1,9 +1,9 @@
 class Artikal {
     constructor(id, naziv, cena, opis) {
         this.id = id;
-        this.naziv = naziv.trim();
-        this.cena = Number(cena);
-        this.opis = opis.trim();
+        this.naziv = naziv;
+        this.cena = cena;
+        this.opis = opis;
     }
 }
 
@@ -28,8 +28,29 @@ function popuniTabelu() {
         `;
         
         tr.dataset.id = artikal.id;
+
+        tr.addEventListener('click', function() {
+            displayDetails(artikal);
+        });
+        
         tbody.appendChild(tr);
     });
+}
+
+function displayDetails(artikal) {
+    const p = document.createElement("p");
+    
+    p.innerHTML = `
+        Naziv: ${artikal.naziv}<br>
+        Cena: ${artikal.cena} RSD<br>
+        Opis: ${artikal.opis}
+    `;
+
+    const detalji = document.querySelector("#detalji");
+
+    detalji.innerHTML = "";
+
+    detalji.appendChild(p);
 }
 
 document.addEventListener('DOMContentLoaded', popuniTabelu);

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8">
+  <title>Artikli</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    hr {
+      margin: 10px 0 40px 0;
+    }
+
+    .glavni {
+      display: flex;
+      gap: 80px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 400px;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+
+    .desno {
+      width: 350px;
+    }
+
+    .polje {
+      margin: 15px 0;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 6px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      height: 70px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 8px 20px;
+    }
+
+    #detalji {
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Artikli</h1>
+
+<hr>
+
+<div class="glavni">
+  <table>
+    <thead>
+      <tr>
+        <th>Br</th>
+        <th>Naziv</th>
+        <th>Cena($)</th>
+      </tr>
+    </thead>
+    <tbody id="tabela">
+      
+    </tbody>
+  </table>
+
+  <div class="desno">
+    <div class="polje">
+      <label>Naziv:</label>
+      <input type="text" id="naziv">
+    </div>
+
+    <div class="polje">
+      <label>Cena:</label>
+      <input type="text" id="cena">
+    </div>
+
+    <div class="polje">
+      <label>Opis:</label>
+      <textarea id="opis"></textarea>
+    </div>
+
+    <button>Dodaj</button>
+
+    <div id="detalji">
+      <p style="color:#777;">Kliknite na artikal u tabeli da vidite detalje</p>
+    </div>
+  </div>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>

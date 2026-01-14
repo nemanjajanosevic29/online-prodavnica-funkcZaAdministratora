@@ -1,21 +1,33 @@
 class Artikal {
-    constructor(id, naziv, cena, opis) {
-        this.id = id;
+    constructor(naziv, cena, opis) {
         this.naziv = naziv;
         this.cena = cena;
         this.opis = opis;
     }
 }
 
-let artikli = [
-    new Artikal(1, "Bežične slušalice Pro X", 12490, "Visokokvalitetne bežične slušalice sa aktivnim poništavanjem buke, do 30h trajanja baterije i odličnim basom."),
-    new Artikal(2, "Pametni sat Fitness Elite", 8990, "Pametni sat sa merenjem pulsa, SpO2, praćenjem sna, GPS-om i vodootpornošću do 50m."),
-    new Artikal(3, "Prenosivi punjač 20000mAh", 3490, "Brzi powerbank sa 20000mAh kapacitetom, podrškom za PD 20W i dva USB porta.")
-];
+let artikli = [];
+
+function ucitajIzStorage() {
+    const sacuvani = localStorage.getItem("artikli");
+    if (sacuvani) {
+        artikli = JSON.parse(sacuvani);
+    } else {
+        artikli = [
+            new Artikal("Bežične slušalice Pro X", 12490, "Visokokvalitetne bežične slušalice sa aktivnim poništavanjem buke, do 30h trajanja baterije i odličnim basom."),
+            new Artikal("Pametni sat Fitness Elite", 8990, "Pametni sat sa merenjem pulsa, SpO2, praćenjem sna, GPS-om i vodootpornošću do 50m."),
+            new Artikal("Prenosivi punjač 20000mAh", 3490, "Brzi powerbank sa 20000mAh kapacitetom, podrškom za PD 20W i dva USB porta.")
+        ];
+    }
+}
+
+function sacuvajUSstorage() {
+    localStorage.setItem("artikli", JSON.stringify(artikli));
+}
 
 function createArticleRows() {
     const tbody = document.getElementById('tabela');
-    tbody.innerHTML = '';  
+    tbody.innerHTML = '';
 
     for (let i = 0; i < artikli.length; i++) {
         const artikal = artikli[i];
@@ -45,8 +57,8 @@ function createArticleRows() {
 
 function displayDetails(artikal) {
     const detalji = document.querySelector("#detalji");
-    detalji.innerHTML = "";  
-    
+    detalji.innerHTML = "";
+
     const p = document.createElement("p");
     p.innerHTML = "Naziv: " + artikal.naziv + "<br>" +
                   "Cena: " + artikal.cena + " RSD<br>" +
@@ -63,10 +75,12 @@ function handleFormSubmission() {
         const cena = document.querySelector('#cena').value;
         const opis = document.querySelector('#opis').value;
         
-        const noviArtikal = new Artikal(artikli.length + 1, naziv, cena, opis);
+        const noviArtikal = new Artikal(naziv, cena, opis);
         artikli.push(noviArtikal);
         
-        createArticleRows();  
+        createArticleRows();
+        
+        sacuvajUSstorage();
         
         document.querySelector('#naziv').value = '';
         document.querySelector('#cena').value = '';
@@ -75,6 +89,7 @@ function handleFormSubmission() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    ucitajIzStorage();  
     createArticleRows();
     handleFormSubmission();
 });
